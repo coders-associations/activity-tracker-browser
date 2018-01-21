@@ -1,0 +1,17 @@
+<div>
+    <div *ngIf="error | async" class="error">{{ error | async }}</div>
+    <form *ngIf="!(loading | async)" (ngSubmit)="submit()" [formGroup]="form" novalidate>
+        <mat-form-field>
+            <input matInput required placeholder="Email Address" autocorrect="off" autocapitalize="off" spellcheck="off" formControlName="email" [class.invalid]="form.controls.email.errors && form.controls.email.dirty">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput required type="password" placeholder="Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="off" formControlName="password" [class.invalid]="form.controls.password.errors && form.controls.password.dirty">
+        </mat-form-field>
+        <button mat-raised-button color="accent" [disabled]="form.invalid" type="submit">Sign In</button>
+        <a mat-button (click)="signUp()">Sign Up with Email</a>
+    </form>
+    <div>
+        <mat-spinner *ngIf="loading | async"></mat-spinner>
+    </div>
+    <p *ngIf="authenticated | async">Welcome!</p>
+</div>
