@@ -1,0 +1,56 @@
+<form>
+  <mat-form-field>
+    <input
+        matInput
+        required
+        placeholder="First name"
+        autocorrect="off"
+        formControlName="first_name"
+        type="text"
+        [class.invalid]="form.controls.first_name.errors && form.controls.first_name.dirty"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input
+        matInput
+        required
+        placeholder="Last name"
+        autocorrect="off"
+        formControlName="last_name"
+        type="text"
+        [class.invalid]="form.controls.last_name.errors && form.controls.last_name.dirty"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input
+        matInput
+        required
+        placeholder="Email Address"
+        autocorrect="off"
+        formControlName="email"
+        type="email"
+        [class.invalid]="form.controls.email.errors && form.controls.email.dirty"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input
+        matInput
+        required
+        placeholder="Password"
+        formControlName="password"
+        type="password"
+        [class.invalid]="form.controls.password.errors && form.controls.password.dirty"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input
+        matInput
+        required
+        placeholder="Retype password"
+        formControlName="password_recheck"
+        type="password"
+        [class.invalid]="form.controls.password_recheck.errors && form.controls.password_recheck.dirty"
+    >
+  </mat-form-field>
+  <button mat-raised-button color="accent" [disabled]="form.invalid" type="submit">Create account</button>
+</form>
