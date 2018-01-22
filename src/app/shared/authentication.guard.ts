@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import * as RouterActions from '../core/router.actions';
 import { State } from '../store/app.state';
 import { getUsersState } from '../users/store/users.reducers';
-import {map, tap, take} from 'rxjs/operators';
+import {map, tap, take, filter} from 'rxjs/operators';
 
 /**
  * Prevent unauthorized activating and loading of routes
@@ -35,13 +35,12 @@ export class AuthenticatedGuard implements CanActivate {
             .select(getUsersState)
             .pipe(
                 map(state => state.authenticated),
-                tap(authenticated => {
-                    if (!authenticated) {
+                filter(authenticated => authenticated === false),
+                tap(() =>
                         this.store.dispatch(new RouterActions.Go({
                             path: ['/users/sign-in', {routeParam: 1}]
-                        }));
-                    }
-                }),
+                        }))
+                ),
                 take(1)
             );
 

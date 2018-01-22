@@ -56,8 +56,8 @@ export class UserEffects {
             switchMap(payload =>
                 this.userService.authenticate(payload.email, payload.password)
                     .pipe(
-                        map(user => new AuthenticationSuccessAction({user: user})),
-                        catchError(error => Observable.of(new AuthenticationErrorAction({error: error})))
+                        map(user => new AuthenticationSuccessAction({ user })),
+                        catchError(error => Observable.of(new AuthenticationErrorAction({ error })))
                     )
             )
         );
@@ -73,8 +73,8 @@ export class UserEffects {
             switchMap(payload =>
                 this.userService.authenticatedUser()
                     .pipe(
-                        map(user => new AuthenticatedSuccessAction({authenticated: (user !== null), user: user})),
-                        catchError(error => Observable.of(new AuthenticatedErrorAction({error: error})))
+                        map(user => new AuthenticatedSuccessAction({ authenticated: (user !== null), user })),
+                        catchError(error => Observable.of(new AuthenticatedErrorAction({ error })))
                     )
             )
         );
@@ -91,8 +91,8 @@ export class UserEffects {
             switchMap(payload =>
                 this.userService.create(payload.user)
                     .pipe(
-                        map(user => new SignUpSuccessAction({user: user})),
-                        catchError(error => Observable.of(new SignUpErrorAction({error: error})))
+                        map(user => new SignUpSuccessAction({ user })),
+                        catchError(error => Observable.of(new SignUpErrorAction({  error })))
                     )
             )
         );
@@ -109,7 +109,7 @@ export class UserEffects {
                 this.userService.signout()
                     .pipe(
                         map(value => new SignOutSuccessAction()),
-                        catchError(error => Observable.of(new SignOutErrorAction({error: error})))
+                        catchError(error => Observable.of(new SignOutErrorAction({ error })))
                     )
             )
         );

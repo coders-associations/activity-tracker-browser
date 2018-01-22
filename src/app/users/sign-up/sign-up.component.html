@@ -1,3 +1,54 @@
-<p>
-  sign-up works!
-</p>
+<form>
+  <mat-form-field>
+    <input
+        matInput
+        required
+        placeholder="First name"
+        autocorrect="off"
+        formControlName="text"
+        [class.invalid]="form.controls.email.errors && form.controls.email.dirty"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input
+        matInput
+        required
+        placeholder="Last name"
+        autocorrect="off"
+        formControlName="text"
+        [class.invalid]="form.controls.email.errors && form.controls.email.dirty"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input
+        matInput
+        required
+        placeholder="Email Address"
+        autocorrect="off"
+        formControlName="email"
+        type="email"
+        [class.invalid]="form.controls.email.errors && form.controls.email.dirty"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input
+        matInput
+        required
+        placeholder="Password"
+        formControlName="password"
+        type="password"
+        [class.invalid]="form.controls.email.errors && form.controls.email.dirty"
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input
+        matInput
+        required
+        placeholder="Retype password"
+        formControlName="password-recheck"
+        type="password"
+        [class.invalid]="form.controls.email.errors && form.controls.email.dirty"
+    >
+  </mat-form-field>
+  <button mat-raised-button color="accent" [disabled]="form.invalid" type="submit">Create account</button>
+</form>
