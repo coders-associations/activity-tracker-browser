@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import * as RouterActions from '../core/router.actions';
 import { State } from '../store/app.state';
 import { getUsersState } from '../users/store/users.reducers';
-import {map, tap, take, filter} from 'rxjs/operators';
+import { map, tap, take, filter } from 'rxjs/operators';
 
 /**
  * Prevent unauthorized activating and loading of routes
