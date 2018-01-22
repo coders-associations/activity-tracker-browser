@@ -4,12 +4,13 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';
 import { User } from '../models/user';
 
-export const MOCK_USER = new User();
-MOCK_USER._id = '1';
-MOCK_USER.email = '1';
-MOCK_USER.firstName = 'Foo';
-MOCK_USER.lastName = 'Bar';
-MOCK_USER.password = '1';
+export const MOCK_USER: User = {
+   _id: '1',
+    email: '1',
+    firstName: 'Foo',
+    lastName: 'Bar',
+    password: '1',
+};
 
 /**
  * The user service.
@@ -30,7 +31,7 @@ export class UserService {
      * @param {string} password The user's password
      * @returns {Observable<User>} The authenticated user observable.
      */
-    public authenticate(email: string, password: string): Observable<User> {
+    authenticate(email: string, password: string): Observable<User> {
         // Normally you would do an HTTP request to determine to
         // attempt authenticating the user using the supplied credentials.
 
@@ -46,7 +47,8 @@ export class UserService {
      * Determines if the user is authenticated
      * @returns {Observable<boolean>}
      */
-    public authenticated(): Observable<boolean> {
+    authenticated(): Observable<boolean> {
+
         return Observable.of(this._authenticated);
     }
 
@@ -54,7 +56,7 @@ export class UserService {
      * Returns the authenticated user
      * @returns {User}
      */
-    public authenticatedUser(): Observable<User> {
+    authenticatedUser(): Observable<User> {
         // Normally you would do an HTTP request to determine if
         // the user has an existing auth session on the server
         // but, let's just return the mock user for this example.
@@ -65,7 +67,7 @@ export class UserService {
      * Create a new user
      * @returns {User}
      */
-    public create(user: User): Observable<User> {
+    create(user: User): Observable<User> {
         // Normally you would do an HTTP request to POST the user
         // details and then return the new user object
         // but, let's just return the new user for this example.
@@ -77,7 +79,7 @@ export class UserService {
      * End session
      * @returns {Observable<boolean>}
      */
-    public signout(): Observable<boolean> {
+    signout(): Observable<boolean> {
         // Normally you would do an HTTP request sign end the session
         // but, let's just return an observable of true.
         this._authenticated = false;

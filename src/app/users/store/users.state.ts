@@ -6,19 +6,10 @@ import { User } from '../../core/models/user';
 
 export interface State {
 
-    // boolean if user is authenticated
     authenticated: boolean;
-
-    // error message
     error?: string;
-
-    // true if we have attempted existing auth session
     loaded: boolean;
-
-    // true when loading
     loading: boolean;
-
-    // the authenticated user
     user?: User;
 }
 

@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 
 // import @ngrx
-import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
+import { Effect, Actions, toPayload } from '@ngrx/effects';
 
 // import rxjs
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/catch';
+import {catchError, debounceTime, map, switchMap} from 'rxjs/operators';
 
 // import services
 import { UserService } from '../../core/services/user.service';
@@ -53,13 +50,17 @@ export class UserEffects {
     @Effect()
     public authenticate: Observable<Action> = this.actions
         .ofType(ActionTypes.AUTHENTICATE)
-        .debounceTime(500)
-        .map(toPayload)
-        .switchMap(payload => {
-            return this.userService.authenticate(payload.email, payload.password)
-                .map(user => new AuthenticationSuccessAction({ user: user }))
-                .catch(error => Observable.of(new AuthenticationErrorAction({ error: error })));
-        });
+        .pipe(
+            debounceTime(500),
+            map(toPayload),
+            switchMap(payload =>
+                this.userService.authenticate(payload.email, payload.password)
+                    .pipe(
+                        map(user => new AuthenticationSuccessAction({user: user})),
+                        catchError(error => Observable.of(new AuthenticationErrorAction({error: error})))
+                    )
+            )
+        );
 
     /**
      * Determine if the user is authenticated.
@@ -67,12 +68,16 @@ export class UserEffects {
     @Effect()
     public authenticated: Observable<Action> = this.actions
         .ofType(ActionTypes.AUTHENTICATED)
-        .map(toPayload)
-        .switchMap(payload => {
-            return this.userService.authenticatedUser()
-                .map(user => new AuthenticatedSuccessAction({ authenticated: (user !== null), user: user }))
-                .catch(error => Observable.of(new AuthenticatedErrorAction({ error: error })));
-        });
+        .pipe(
+            map(toPayload),
+            switchMap(payload =>
+                this.userService.authenticatedUser()
+                    .pipe(
+                        map(user => new AuthenticatedSuccessAction({authenticated: (user !== null), user: user})),
+                        catchError(error => Observable.of(new AuthenticatedErrorAction({error: error})))
+                    )
+            )
+        );
 
     /**
      * Create a new user.
@@ -80,13 +85,17 @@ export class UserEffects {
     @Effect()
     public createUser: Observable<Action> = this.actions
         .ofType(ActionTypes.SIGN_UP)
-        .debounceTime(500)
-        .map(toPayload)
-        .switchMap(payload => {
-            return this.userService.create(payload.user)
-                .map(user => new SignUpSuccessAction({ user: user }))
-                .catch(error => Observable.of(new SignUpErrorAction({ error: error })));
-        });
+        .pipe(
+            debounceTime(500),
+            map(toPayload),
+            switchMap(payload =>
+                this.userService.create(payload.user)
+                    .pipe(
+                        map(user => new SignUpSuccessAction({user: user})),
+                        catchError(error => Observable.of(new SignUpErrorAction({error: error})))
+                    )
+            )
+        );
 
     /**
      * Terminate user session.
@@ -94,20 +103,23 @@ export class UserEffects {
     @Effect()
     public signOut: Observable<Action> = this.actions
         .ofType(ActionTypes.SIGN_OUT)
-        .map(toPayload)
-        .switchMap(payload => {
-            return this.userService.signout()
-                .map(value => new SignOutSuccessAction())
-                .catch(error => Observable.of(new SignOutErrorAction({ error: error })));
-        });
+        .pipe(
+            map(toPayload),
+            switchMap(payload =>
+                this.userService.signout()
+                    .pipe(
+                        map(value => new SignOutSuccessAction()),
+                        catchError(error => Observable.of(new SignOutErrorAction({error: error})))
+                    )
+            )
+        );
 
     /**
      * @constructor
      * @param {Actions }actions
      * @param {UserService} userService
      */
-    constructor(
-        private actions: Actions,
-        private userService: UserService
-    ) { }
+    constructor(private actions: Actions,
+                private userService: UserService) {
+    }
 }

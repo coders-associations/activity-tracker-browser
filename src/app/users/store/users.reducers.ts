@@ -4,6 +4,7 @@ import { Actions, ActionTypes } from './users.actions';
 // import models
 import { User } from '../../core/models/user';
 import { State } from './users.state';
+import { createFeatureSelector } from '@ngrx/store';
 
 /**
  * The reducer function.
@@ -15,31 +16,35 @@ export function reducer(state: any, action: Actions): State {
 
     switch (action.type) {
         case ActionTypes.AUTHENTICATE:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 loading: true
-            });
+            };
 
         case ActionTypes.AUTHENTICATED_ERROR:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 authenticated: false,
                 error: action.payload.error.message,
                 loaded: true
-            });
+            };
 
         case ActionTypes.AUTHENTICATED_SUCCESS:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 authenticated: action.payload.authenticated,
                 loaded: true,
                 user: action.payload.user
-            });
+            };
 
         case ActionTypes.AUTHENTICATE_ERROR:
         case ActionTypes.SIGN_UP_ERROR:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 authenticated: false,
                 error: action.payload.error.message,
                 loading: false
-            });
+            };
 
         case ActionTypes.AUTHENTICATE_SUCCESS:
         case ActionTypes.SIGN_UP_SUCCESS:
@@ -50,38 +55,44 @@ export function reducer(state: any, action: Actions): State {
                 return state;
             }
 
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 authenticated: true,
                 error: undefined,
                 loading: false,
                 user: user
-            });
+            };
 
         case ActionTypes.SIGN_OUT_ERROR:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 authenticated: true,
                 error: action.payload.error.message,
                 user: undefined
-            });
+            };
 
         case ActionTypes.SIGN_OUT_SUCCESS:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 authenticated: false,
                 error: undefined,
                 user: undefined
-            });
+            };
 
         case ActionTypes.SIGN_UP:
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 authenticated: false,
                 error: undefined,
                 loading: true
-            });
+            };
 
         default:
             return state;
     }
 }
+
+export const getUsersState = createFeatureSelector<State>('users');
 
 /**
  * Returns true if the user is authenticated.

@@ -6,22 +6,15 @@ import { Store } from '@ngrx/store';
 
 // rxjs
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/takeWhile';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/filter';
+import {filter, map, takeWhile} from 'rxjs/operators';
 
 // actions
 import { AuthenticateAction } from '../store/users.actions';
 import * as RouterActions from '../../core/router.actions';
 
 
-// reducers
-import {
-    getAuthenticationError,
-    isAuthenticated,
-    isAuthenticationLoading
-} from '../../store/app.reducers';
 import { State } from '../../store/app.state';
+import { getUsersState } from '../store/users.reducers';
 
 /**
  * /users/sign-in
@@ -85,20 +78,23 @@ export class SignInComponent implements OnDestroy, OnInit {
         });
 
         // set error
-        this.error = this.store.select(getAuthenticationError);
+        this.error = this.store.select(getUsersState).pipe(map(state => state.error));
 
         // set loading
-        this.loading = this.store.select(isAuthenticationLoading);
+        this.loading = this.store.select(getUsersState).pipe(map(state => state.loading));
 
-        this.authenticated = this.store.select(isAuthenticated);
+        this.authenticated = this.store.select(getUsersState).pipe(map(state => state.authenticated));
 
         // subscribe to success
-        this.store.select(isAuthenticated)
-            .takeWhile(() => this.alive)
-            .filter(authenticated => authenticated)
+        this.store.select(getUsersState)
+            .pipe(
+                map(state => state.authenticated),
+                takeWhile(() => this.alive),
+                filter(authenticated => authenticated)
+            )
             .subscribe(value => {
                 this.store.dispatch(new RouterActions.Go({
-                    path: ['/users/my-account', { routeParam: 1 }]
+                    path: ['/users/my-account', {routeParam: 1}]
                 }));
             });
     }
@@ -137,12 +133,8 @@ export class SignInComponent implements OnDestroy, OnInit {
      */
     public submit() {
         // get email and password values
-        const email: string = this.form.get('email').value;
-        const password: string = this.form.get('password').value;
-
-        // trim values
-        email.trim();
-        password.trim();
+        const email: string = this.form.get('email').value.trim();
+        const password: string = this.form.get('password').value.trim();
 
         // set payload
         const payload = {

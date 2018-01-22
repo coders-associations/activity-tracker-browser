@@ -1,26 +1,26 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 // components
-import { NotFoundComponent } from "./not-found/not-found.component";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
     {
-        path: "users",
-        loadChildren: "./users/users.module#UsersModule"
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/users/my-account'
     },
     {
-        path: "",
-        pathMatch: "full",
-        redirectTo: "/users/my-account"
+        path: 'users',
+        loadChildren: './users/users.module#UsersModule'
     },
     {
-        path: "404",
+        path: '404',
         component: NotFoundComponent
     },
     {
-        path: "**",
-        redirectTo: "/404"
+        path: '**',
+        redirectTo: '/404'
     }
 ];
 

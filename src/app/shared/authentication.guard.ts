@@ -3,18 +3,15 @@ import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angul
 
 // import rxjs
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/take';
 
 // import @ngrx
 import { Store } from '@ngrx/store';
 
-// reducers
-import {
-    isAuthenticated
-} from '../store/app.reducers';
-
 import * as RouterActions from '../core/router.actions';
 import { State } from '../store/app.state';
+import { getUsersState } from '../users/store/users.reducers';
+import {map, tap, take} from 'rxjs/operators';
 
 /**
  * Prevent unauthorized activating and loading of routes
@@ -32,18 +29,21 @@ export class AuthenticatedGuard implements CanActivate {
      * True when user is authenticated
      * @method canActivate
      */
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | boolean {
         // get observable
-        const observable = this.store.select(isAuthenticated);
-
-        // redirect to sign in page if user is not authenticated
-        observable.subscribe(authenticated => {
-            if (!authenticated) {
-                this.store.dispatch(new RouterActions.Go({
-                    path: ['/users/sign-in', { routeParam: 1 }]
-                }));
-            }
-        });
+        const observable = this.store
+            .select(getUsersState)
+            .pipe(
+                map(state => state.authenticated),
+                tap(authenticated => {
+                    if (!authenticated) {
+                        this.store.dispatch(new RouterActions.Go({
+                            path: ['/users/sign-in', {routeParam: 1}]
+                        }));
+                    }
+                }),
+                take(1)
+            );
 
         return observable;
     }

@@ -2,10 +2,10 @@
 import { Action } from '@ngrx/store';
 
 // import type function
+import { type } from '../../core/util';
 
 // import models
 import { User } from '../../core/models/user';
-import { type } from '../../core/util';
 
 export const ActionTypes = {
     AUTHENTICATE: type('[users] Authenticate'),
@@ -148,8 +148,7 @@ export class SignUpSuccessAction implements Action {
     constructor(public payload: { user: User }) {}
 }
 
-export type Actions =
-    AuthenticateAction
+export type Actions = AuthenticateAction
     | AuthenticatedAction
     | AuthenticatedErrorAction
     | AuthenticatedSuccessAction

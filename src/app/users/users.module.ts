@@ -1,22 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 // @angular/flex-layout
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthenticatedGuard } from '../shared/authentication.guard';
-
-
-// @angular/material
-import {
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatMenuModule
-} from '@angular/material';
 
 // components
 import { MyAccountComponent } from './my-account/my-account.component';
@@ -26,6 +13,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 
 // routing
 import { UsersRoutingModule } from './users-routing.module';
+import { modelEffectsModule, modelStoreModule, reducerProvider, initialStateProvider } from './store/index';
+import { SharedModule } from '../shared/shared.module';
 
 // components constant
 const components = [
@@ -38,22 +27,18 @@ const components = [
 @NgModule({
     imports: [
         CommonModule,
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatIconModule,
-        MatInputModule,
-        MatProgressSpinnerModule,
-        MatMenuModule,
-        ReactiveFormsModule,
+        SharedModule,
         RouterModule,
-        UsersRoutingModule
+        UsersRoutingModule,
+        modelStoreModule,
+        modelEffectsModule
     ],
     declarations: components,
     exports: components,
     providers: [
-        AuthenticatedGuard
+        AuthenticatedGuard,
+        reducerProvider,
+        initialStateProvider
     ]
 })
 export class UsersModule { }

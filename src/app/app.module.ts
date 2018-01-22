@@ -18,10 +18,7 @@ import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 
 // reducers
-import { reducers } from './store/app.reducers';
-import { EffectsModule } from '@ngrx/effects';
-import { UserEffects } from './users/store/users.effects';
-import {initialState} from "./store/app.state";
+import {effectsModule, reducerProvider, storeModule} from './store/index';
 
 
 @NgModule({
@@ -35,14 +32,13 @@ import {initialState} from "./store/app.state";
       BrowserAnimationsModule,
       FormsModule,
       StoreRouterConnectingModule,
-      StoreModule.forRoot(reducers, {
-          initialState: initialState
-      }),
-      EffectsModule.forRoot([
-          UserEffects
-      ])
+      storeModule,
+      effectsModule
   ],
-  providers: [UserService],
+  providers: [
+      UserService,
+      reducerProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
