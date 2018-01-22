@@ -6,10 +6,10 @@ import { RouterModule } from '@angular/router';
 import { AuthenticatedGuard } from '../shared/authentication.guard';
 
 // components
-import { MyAccountComponent } from './my-account/my-account.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignOutComponent } from './sign-out/sign-out.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignOutComponent } from './components/sign-out/sign-out.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 // routing
 import { UsersRoutingModule } from './users-routing.module';

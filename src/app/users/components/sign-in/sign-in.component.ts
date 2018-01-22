@@ -9,12 +9,12 @@ import { Observable } from 'rxjs/Observable';
 import {filter, map, takeWhile} from 'rxjs/operators';
 
 // actions
-import { AuthenticateAction } from '../store/users.actions';
-import * as RouterActions from '../../core/router.actions';
+import { AuthenticateAction } from '../../store/users.actions';
+import * as RouterActions from '../../../core/router.actions';
 
 
-import { State } from '../../store/app.state';
-import { getUsersState } from '../store/users.reducers';
+import { State } from '../../../store/app.state';
+import { getUsersState } from '../../store/users.reducers';
 
 /**
  * /users/sign-in
