@@ -6,29 +6,21 @@ import {
     MatProgressSpinnerModule
 } from '@angular/material';
 
+const sharedModules = [
+    FlexLayoutModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    ReactiveFormsModule
+];
+
 @NgModule({
-    imports: [
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatIconModule,
-        MatInputModule,
-        MatProgressSpinnerModule,
-        MatMenuModule,
-        ReactiveFormsModule
-    ],
-    exports: [
-        FlexLayoutModule,
-        FormsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatIconModule,
-        MatInputModule,
-        MatProgressSpinnerModule,
-        MatMenuModule,
-        ReactiveFormsModule
-    ]
+    imports: sharedModules,
+    exports: sharedModules
 })
 
 export class SharedModule { }
