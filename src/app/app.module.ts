@@ -18,7 +18,8 @@ import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 
 // reducers
-import {effectsModule, reducerProvider, storeModule} from './store/index';
+import { effectsModule, reducerProvider, storeModule } from './store/index';
+import { HomepageModule } from './homepage/homepage.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {effectsModule, reducerProvider, storeModule} from './store/index';
   ],
   imports: [
       AppRoutingModule,
+      HomepageModule,
       BrowserModule,
       BrowserAnimationsModule,
       FormsModule,

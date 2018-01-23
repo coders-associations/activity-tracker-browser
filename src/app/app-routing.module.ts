@@ -3,12 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 // components
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LandingPageComponent } from './homepage/components/landing-page/landing-page.component';
 
 const routes: Routes = [
     {
         path: '',
-        pathMatch: 'full',
-        redirectTo: '/users/my-account'
+        component: LandingPageComponent
     },
     {
         path: 'users',
