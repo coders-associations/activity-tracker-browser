@@ -1,5 +1,9 @@
 @import '../../../../../node_modules/@angular/material/theming';
 
+.sign-in__form {
+    margin-top: 65px;
+}
+
 :host {
     .flex-container {
         background-color: mat-color($mat-grey, 100);

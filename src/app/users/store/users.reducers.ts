@@ -2,7 +2,7 @@
 import { Actions, ActionTypes } from './users.actions';
 
 // import models
-import { User } from '../../core/models/user';
+import { User } from '../models/user';
 import { State } from './users.state';
 import { createFeatureSelector } from '@ngrx/store';
 

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import {catchError, debounceTime, map, switchMap} from 'rxjs/operators';
 
 // import services
-import { UserService } from '../../core/services/user.service';
+import { UserService } from '../services/user.service';
 
 // import actions
 import {
@@ -86,7 +86,6 @@ export class UserEffects {
     public createUser: Observable<Action> = this.actions
         .ofType(ActionTypes.SIGN_UP)
         .pipe(
-            debounceTime(500),
             map(toPayload),
             switchMap(payload =>
                 this.userService.create(payload.user)

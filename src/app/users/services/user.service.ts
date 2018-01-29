@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';
 import { User } from '../models/user';
+import { HttpClient } from '@angular/common/http';
+import { APP_CONFIG, AppConfig } from '../../app-config.module';
+import { catchError, map } from 'rxjs/operators';
 
 export const MOCK_USER: User = {
    _id: '1',
@@ -24,6 +27,10 @@ export class UserService {
      */
     private _authenticated = false;
 
+    constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) {
+
+    }
+
     /**
      * Authenticate the user
      *
@@ -35,12 +42,22 @@ export class UserService {
         // Normally you would do an HTTP request to determine to
         // attempt authenticating the user using the supplied credentials.
 
-        if (email === MOCK_USER.email && password === MOCK_USER.password) {
-            this._authenticated = true;
-            return Observable.of(MOCK_USER);
-        }
+        if (this.config.server_available) {
+            return this.http
+                .post(`${this.config.apiEndpoint}/auth`, {email, password})
+                .pipe(
+                    map(data => {
+                        return MOCK_USER;
+                    })
+                );
+        } else {
+            if (email === MOCK_USER.email && password === MOCK_USER.password) {
+                this._authenticated = true;
+                return Observable.of(MOCK_USER);
+            }
 
-        return Observable.throw(new Error('Invalid email or password'));
+            return Observable.throw(new Error('Invalid email or password'));
+        }
     }
 
     /**
@@ -71,8 +88,20 @@ export class UserService {
         // Normally you would do an HTTP request to POST the user
         // details and then return the new user object
         // but, let's just return the new user for this example.
-        this._authenticated = true;
-        return Observable.of(user);
+        const {email, password, firstName, lastName} = user;
+
+        if (this.config.server_available) {
+            return this.http
+                .post(`${this.config.apiEndpoint}/users`, {email, password, firstName, lastName})
+                .pipe(
+                    map(data => {
+                        return user;
+                    })
+                );
+        } else {
+            this._authenticated = true;
+            return Observable.of(user);
+        }
     }
 
     /**

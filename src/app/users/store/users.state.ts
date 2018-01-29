@@ -1,11 +1,10 @@
-import { User } from '../../core/models/user';
+import { User } from '../models/user';
 /**
  * The state.
  * @interface State
  */
 
 export interface State {
-
     authenticated: boolean;
     error?: string;
     loaded: boolean;

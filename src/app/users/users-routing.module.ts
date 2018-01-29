@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 // components
 import { MyAccountComponent } from './components/my-account/my-account.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignOutComponent } from './components/sign-out/sign-out.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 import { AuthenticatedGuard } from '../shared/authentication.guard';
+import { SignComponent } from './components/sign/sign.component';
+import { AppConfigModule } from '../app-config.module';
 
 // routes
 const routes: Routes = [
@@ -17,16 +17,12 @@ const routes: Routes = [
         component: MyAccountComponent
     },
     {
-        path: 'sign-in',
-        component: SignInComponent
+        path: 'login',
+        component: SignComponent
     },
     {
         path: 'sign-out',
         component: SignOutComponent
-    },
-    {
-        path: 'sign-up',
-        component: SignUpComponent
     }
 ];
 
@@ -35,7 +31,9 @@ const routes: Routes = [
         RouterModule
     ],
     imports: [
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        AppConfigModule
     ]
 })
+
 export class UsersRoutingModule { }

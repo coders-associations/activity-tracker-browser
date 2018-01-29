@@ -5,7 +5,7 @@ import { Action } from '@ngrx/store';
 import { type } from '../../core/util';
 
 // import models
-import { User } from '../../core/models/user';
+import { User } from '../models/user';
 
 export const ActionTypes = {
     AUTHENTICATE: type('[users] Authenticate'),

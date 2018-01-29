@@ -9,17 +9,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
-// services
-import { UserService } from './core/services/user.service';
+
 
 // @ngrx
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 
 // reducers
 import { effectsModule, reducerProvider, storeModule } from './store/index';
 import { HomepageModule } from './homepage/homepage.module';
+import { RouterModule } from '@angular/router';
+import { UsersModule } from './users/users.module';
+import { AppConfigModule } from './app-config.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { HomepageModule } from './homepage/homepage.module';
       NotFoundComponent
   ],
   imports: [
+      AppConfigModule,
       AppRoutingModule,
       HomepageModule,
       BrowserModule,
@@ -35,12 +37,15 @@ import { HomepageModule } from './homepage/homepage.module';
       FormsModule,
       StoreRouterConnectingModule,
       storeModule,
-      effectsModule
+      effectsModule,
+      RouterModule,
+      UsersModule
   ],
   providers: [
-      UserService,
-      reducerProvider
+      reducerProvider,
+      AppConfigModule
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

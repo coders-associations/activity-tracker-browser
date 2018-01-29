@@ -15,6 +15,10 @@ const routes: Routes = [
         loadChildren: './users/users.module#UsersModule'
     },
     {
+        path: 'dashboard',
+        loadChildren: './dashboard/dashboard.module#DashboardModule'
+    },
+    {
         path: '404',
         component: NotFoundComponent
     },
@@ -32,4 +36,5 @@ const routes: Routes = [
         RouterModule.forRoot(routes)
     ]
 })
+
 export class AppRoutingModule { }
