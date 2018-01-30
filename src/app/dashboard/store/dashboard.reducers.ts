@@ -48,6 +48,24 @@ export function reducer(state: any, action: Actions): State {
                 ...state,
                 loaded: true
             };
+        case ActionTypes.GET_ACTIVITY_HISTORY:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case ActionTypes.GET_ACTIVITY_HISTORY_SUCCESS:
+            return {
+                ...state,
+                activityEvents: action.payload.activityEvents,
+                loaded: true
+            };
+
+        case ActionTypes.GET_ACTIVITY_HISTORY_ERROR:
+            return {
+                ...state,
+                loaded: true
+            };
 
         default:
             return state;

@@ -3,8 +3,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
-    MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule,
-    MatProgressSpinnerModule, MatSidenavModule
+    MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
+    MatProgressSpinnerModule, MatSidenavModule, MatTableModule
 } from '@angular/material';
 import { MenuComponent } from './components/menu/menu.component';
 import { ActionButtonsComponent } from './components/action-buttons/action-buttons.component';
@@ -18,12 +18,14 @@ const sharedModules = [
     MatCardModule,
     MatIconModule,
     MatListModule,
+    MatTableModule,
     MatInputModule,
     MatProgressSpinnerModule,
     MatMenuModule,
     ReactiveFormsModule,
     MatSidenavModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
 ];
 
 @NgModule({

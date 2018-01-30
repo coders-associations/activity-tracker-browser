@@ -4,7 +4,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { INITIAL_STATE } from '@ngrx/store';
 import { reducer } from './dashboard.reducers';
 import { initialState, State } from './dashboard.state';
-import { UserEffects } from './dashboard.effects';
+import { ActivityEffects } from './dashboard.effects';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<State>>('dashboard.reducer');
 
@@ -31,7 +31,7 @@ const modelStoreModule = [
 ];
 
 const modelEffectsModule = [
-    EffectsModule.forFeature([UserEffects]),
+    EffectsModule.forFeature([ActivityEffects]),
 ];
 
 export {

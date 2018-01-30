@@ -1,68 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Activity } from '../models/activity';
-
-export const MOCK_ACTIVITIES: Array<Activity> = [
-    {
-        cols: 0,
-        rows: 0,
-        name: 'xyz',
-        type: 'freq',
-        color: 'blue'
-    },
-    {
-        cols: 0,
-        rows: 0,
-        name: 'xyz',
-        type: 'time',
-        color: 'blue'
-    },
-    {
-        cols: 0,
-        rows: 0,
-        name: 'xyz',
-        type: 'freq',
-        color: 'blue'
-    },
-    {
-        cols: 0,
-        rows: 0,
-        name: 'xyz',
-        type: 'time',
-        color: 'blue'
-    },
-    {
-        cols: 0,
-        rows: 0,
-        name: 'xyz',
-        type: 'time',
-        color: 'blue'
-    },
-    {
-        cols: 0,
-        rows: 0,
-        name: 'xyz',
-        type: 'time',
-        color: 'blue'
-    },
-    {
-        cols: 0,
-        rows: 0,
-        name: 'xyz',
-        type: 'new',
-        color: 'blue'
-    },
-    {
-        cols: 0,
-        rows: 0,
-        name: 'xyz',
-        type: 'settings',
-        color: 'blue'
-    }
-];
+import { ActivityEvent } from '../models/activityEvent';
+import { MOCK_ACTIVITIES } from '../mocks/activities';
+import { MOCK_ACTIVITY_EVENTS } from '../mocks/activityEvents';
 
 @Injectable()
-export class GridService {
+export class ActivityService {
     /**
      * Returns the authenticated user
      * @returns {User}
@@ -74,11 +18,26 @@ export class GridService {
         return Observable.of(true);
     }
 
+    logItem(): Observable<boolean> {
+        // Normally you would do an HTTP request to determine if
+        // the user has an existing auth session on the server
+        // but, let's just return the mock user for this example.
+        return Observable.of(true);
+    }
+
     getItemsList(): Observable<Array<Activity>> {
         // Normally you would do an HTTP request to determine if
         // the user has an existing auth session on the server
         // but, let's just return the mock user for this example.
         return Observable.of(this.determineSizes(MOCK_ACTIVITIES));
+    }
+
+
+    getActivitiesHistory(): Observable<Array<ActivityEvent>> {
+        // Normally you would do an HTTP request to determine if
+        // the user has an existing auth session on the server
+        // but, let's just return the mock user for this example.
+        return Observable.of(MOCK_ACTIVITY_EVENTS);
     }
 
     determineSizes(itemList): Array<Activity> {

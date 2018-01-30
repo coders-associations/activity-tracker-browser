@@ -16,7 +16,7 @@ import { ItemTimeComponent } from './components/activity-grid/item-time/item-tim
 import { ItemNewComponent } from './components/activity-grid/item-new/item-new.component';
 import { ItemSettingsComponent } from './components/activity-grid/item-settings/item-settings.component';
 import { initialStateProvider, modelEffectsModule, modelStoreModule, reducerProvider } from './store/index';
-import { GridService } from './services/grid-service';
+import { ActivityService } from './services/activity-service';
 
 @NgModule({
     imports: [
@@ -44,7 +44,7 @@ import { GridService } from './services/grid-service';
         AuthenticatedGuard,
         reducerProvider,
         initialStateProvider,
-        GridService
+        ActivityService
     ]
 })
 export class DashboardModule { }

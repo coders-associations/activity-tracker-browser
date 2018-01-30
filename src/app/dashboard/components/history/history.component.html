@@ -1,10 +1,39 @@
-<mat-list>
-  <mat-list-item *ngFor="let message of messages">
-    <mat-icon matListIcon>folder</mat-icon>
-    <h3 matLine> {{message.from}} </h3>
-    <p matLine>
-      <span> {{message.subject}} </span>
-      <span class="demo-2"> -- {{message.content}} </span>
-    </p>
-  </mat-list-item>
-</mat-list>
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Activity Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Activity Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="eventType">
+      <mat-header-cell *matHeaderCellDef> Event type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.eventType}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="eventDate">
+      <mat-header-cell *matHeaderCellDef> Date of action </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.eventDate}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageIndex]="0"
+                 [length]="17"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+</div>

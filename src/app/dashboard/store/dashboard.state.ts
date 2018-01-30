@@ -1,10 +1,12 @@
 import { Activity } from '../models/activity';
+import { ActivityEvent } from '../models/activityEvent';
 
 export interface State {
     error?: string;
     loaded: boolean;
     loading: boolean;
     activities: Array<Activity>;
+    activityEvents: Array<ActivityEvent>;
 }
 
 /**
@@ -13,5 +15,6 @@ export interface State {
 export const initialState: State = {
     loaded: false,
     loading: false,
-    activities: []
+    activities: [],
+    activityEvents: []
 };

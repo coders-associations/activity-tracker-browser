@@ -2,33 +2,43 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
-import { ActionTypes, GetActivitiesErrorAction, GetActivitiesSuccessAction } from './dashboard.actions';
-import { debounceTime, switchMap, map, catchError } from 'rxjs/operators';
-import { GridService } from '../services/grid-service';
+import {
+    ActionTypes, GetActivitiesErrorAction, GetActivitiesSuccessAction, GetActivityHistoryErrorAction,
+    GetActivityHistorySuccessAction
+} from './dashboard.actions';
+import { switchMap, map, catchError } from 'rxjs/operators';
+import { ActivityService } from '../services/activity-service';
 
 @Injectable()
-export class UserEffects {
+export class ActivityEffects {
 
-    /**
-     * Authenticate user.
-     */
     @Effect()
-    public authenticate: Observable<Action> = this.actions
-        .ofType(ActionTypes.GET_ACTIVITIES)
+    public getActivityHistory: Observable<Action> = this.actions
+        .ofType(ActionTypes.GET_ACTIVITY_HISTORY)
         .pipe(
-            debounceTime(500),
             map(toPayload),
             switchMap(payload =>
-                this.gridService.getItemsList()
+                this.activityService.getActivitiesHistory()
                     .pipe(
-                        map(activities => {
-                            console.log(activities)
-                            return new GetActivitiesSuccessAction({ activities })
-                        }),
+                        map(activityEvents => new GetActivityHistorySuccessAction({ activityEvents })),
+                        catchError(error => Observable.of(new GetActivityHistoryErrorAction({ error })))
+                    )
+            )
+        );
+
+    @Effect()
+    public getActivities: Observable<Action> = this.actions
+        .ofType(ActionTypes.GET_ACTIVITIES)
+        .pipe(
+            map(toPayload),
+            switchMap(payload =>
+                this.activityService.getItemsList()
+                    .pipe(
+                        map(activities => new GetActivitiesSuccessAction({ activities })),
                         catchError(error => Observable.of(new GetActivitiesErrorAction({ error })))
                     )
             )
-        );;
+        );
 
     /**
      * @constructor
@@ -36,6 +46,6 @@ export class UserEffects {
      * @param {UserService} userService
      */
     constructor(private actions: Actions,
-                private gridService: GridService) {
+                private activityService: ActivityService) {
     }
 }

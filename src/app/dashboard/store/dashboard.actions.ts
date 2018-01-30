@@ -1,6 +1,7 @@
 import { type } from '../../core/util';
 import { Action } from '@ngrx/store';
 import { Activity } from '../models/activity';
+import {ActivityEvent} from '../models/activityEvent';
 
 export const ActionTypes = {
     ADD_ACTIVITY:  type('[dashboard] Add activity'),
@@ -15,6 +16,9 @@ export const ActionTypes = {
     GET_ACTIVITIES: type('[dashboard] Get activity'),
     GET_ACTIVITIES_SUCCESS: type('[dashboard] Get activity success'),
     GET_ACTIVITIES_ERROR: type('[dashboard] Get activity error'),
+    GET_ACTIVITY_HISTORY: type('[dashboard] Get activity history'),
+    GET_ACTIVITY_HISTORY_SUCCESS: type('[dashboard] Get activity history success'),
+    GET_ACTIVITY_HISTORY_ERROR: type('[dashboard] Get activity history error'),
 };
 
 /**
@@ -83,9 +87,45 @@ export class GetActivitiesErrorAction implements Action {
     constructor(public payload?: any) {}
 }
 
+/**
+ * GetActivitiesAction.
+ * @class GetActivitiesAction
+ * @implements {Action}
+ */
+export class GetActivityHistoryAction implements Action {
+    public type: string = ActionTypes.GET_ACTIVITY_HISTORY;
+
+    constructor(public payload?: any) {}
+}
+
+/**
+ * GetActivitiesSuccessAction.
+ * @class GetActivitiesSuccessAction
+ * @implements {Action}
+ */
+export class GetActivityHistorySuccessAction implements Action {
+    public type: string = ActionTypes.GET_ACTIVITY_HISTORY_SUCCESS;
+
+    constructor(public payload: { activityEvents: Array<ActivityEvent> }) {}
+}
+
+/**
+ * GetActivitiesErrorAction.
+ * @class GetActivitiesErrorAction
+ * @implements {Action}
+ */
+export class GetActivityHistoryErrorAction implements Action {
+    public type: string = ActionTypes.GET_ACTIVITY_HISTORY_ERROR;
+
+    constructor(public payload?: any) {}
+}
+
 export type Actions = AddActivityAction |
     AddActivitySuccessAction |
     AddActivityErrorAction |
     GetActivitiesAction |
     GetActivitiesSuccessAction |
-    GetActivitiesErrorAction;
+    GetActivitiesErrorAction |
+    GetActivityHistoryAction |
+    GetActivityHistorySuccessAction |
+    GetActivityHistoryErrorAction;
