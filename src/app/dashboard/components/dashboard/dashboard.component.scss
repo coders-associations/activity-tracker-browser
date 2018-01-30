@@ -1,8 +1,10 @@
+@import "../../../../assets/styles/vars";
+
 .dashboard__container--nav {
-    background: #37474F;
+    background: $bg-almost-blue;
     width: 300px;
 }
 
 .dashboard__container--content{
-    background: #F5F5F5;
+    background: $bg-lighter-gray;
 }

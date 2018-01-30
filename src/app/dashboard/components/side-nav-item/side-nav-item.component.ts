@@ -9,14 +9,11 @@ import { State } from '../../../store/app.state';
   templateUrl: './side-nav-item.component.html',
   styleUrls: ['./side-nav-item.component.scss']
 })
-export class SideNavItemComponent implements OnInit {
+export class SideNavItemComponent {
     @Input() item: SideNavItemModel;
 
     constructor(private store: Store<State>) {
 
-    }
-
-    ngOnInit() {
     }
 
     goToItem() {
