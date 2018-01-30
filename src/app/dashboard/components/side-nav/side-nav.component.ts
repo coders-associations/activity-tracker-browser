@@ -6,7 +6,7 @@ import { SideNavItemModel } from '../../models/side-nav-item';
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss']
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent {
     items: [SideNavItemModel];
 
     constructor() {
@@ -37,8 +37,4 @@ export class SideNavComponent implements OnInit {
             },
         ];
     }
-
-    ngOnInit() {
-    }
-
 }

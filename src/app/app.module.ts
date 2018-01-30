@@ -9,8 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
-
-
 // @ngrx
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { FormsModule } from '@angular/forms';

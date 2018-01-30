@@ -4,6 +4,7 @@ import { Activity } from '../models/activity';
 import { ActivityEvent } from '../models/activityEvent';
 import { MOCK_ACTIVITIES } from '../mocks/activities';
 import { MOCK_ACTIVITY_EVENTS } from '../mocks/activityEvents';
+import { EventColors } from '../enums/eventColors';
 
 @Injectable()
 export class ActivityService {
@@ -12,31 +13,19 @@ export class ActivityService {
      * @returns {User}
      */
     addItem(): Observable<boolean> {
-        // Normally you would do an HTTP request to determine if
-        // the user has an existing auth session on the server
-        // but, let's just return the mock user for this example.
         return Observable.of(true);
     }
 
     logItem(): Observable<boolean> {
-        // Normally you would do an HTTP request to determine if
-        // the user has an existing auth session on the server
-        // but, let's just return the mock user for this example.
         return Observable.of(true);
     }
 
     getItemsList(): Observable<Array<Activity>> {
-        // Normally you would do an HTTP request to determine if
-        // the user has an existing auth session on the server
-        // but, let's just return the mock user for this example.
         return Observable.of(this.determineSizes(MOCK_ACTIVITIES));
     }
 
 
     getActivitiesHistory(): Observable<Array<ActivityEvent>> {
-        // Normally you would do an HTTP request to determine if
-        // the user has an existing auth session on the server
-        // but, let's just return the mock user for this example.
         return Observable.of(MOCK_ACTIVITY_EVENTS);
     }
 
@@ -46,22 +35,22 @@ export class ActivityService {
                 case 'freq':
                     item.cols = 1;
                     item.rows = 1;
-                    item.color = '#EF5350';
+                    item.color = EventColors.FREQ;
                     break;
                 case 'time':
                     item.cols = 2;
                     item.rows = 1;
-                    item.color = '#5C6BC0';
+                    item.color = EventColors.TIME;
                     break;
                 case 'settings':
                     item.cols = 1;
                     item.rows = 2;
-                    item.color = '#90A4AE';
+                    item.color = EventColors.SETTINGS;
                     break;
                 case 'new':
                     item.cols = 1;
                     item.rows = 2;
-                    item.color = '#CFD8DC';
+                    item.color = EventColors.NEW;
                     break;
             }
 
