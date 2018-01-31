@@ -6,7 +6,7 @@ import { Effect, Actions, toPayload } from '@ngrx/effects';
 
 // import rxjs
 import { Observable } from 'rxjs/Observable';
-import {catchError, debounceTime, map, switchMap} from 'rxjs/operators';
+import {catchError, debounceTime, map, switchMap, tap} from 'rxjs/operators';
 
 // import services
 import { UserService } from '../services/user.service';
@@ -51,12 +51,11 @@ export class UserEffects {
     public authenticate: Observable<Action> = this.actions
         .ofType(ActionTypes.AUTHENTICATE)
         .pipe(
-            debounceTime(500),
             map(toPayload),
             switchMap(payload =>
                 this.userService.authenticate(payload.email, payload.password)
                     .pipe(
-                        map(user => new AuthenticationSuccessAction({ user })),
+                        map(token => new AuthenticationSuccessAction({ token, authenticated: true })),
                         catchError(error => Observable.of(new AuthenticationErrorAction({ error })))
                     )
             )

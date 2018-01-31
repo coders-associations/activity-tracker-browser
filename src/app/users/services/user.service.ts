@@ -5,7 +5,7 @@ import 'rxjs/add/observable/of';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG, AppConfig } from '../../app-config.module';
-import { catchError, map } from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 
 export const MOCK_USER: User = {
    _id: '1',
@@ -36,9 +36,9 @@ export class UserService {
      *
      * @param {string} email The user's email address
      * @param {string} password The user's password
-     * @returns {Observable<User>} The authenticated user observable.
+     * @returns {Observable<string>} The authenticated user observable.
      */
-    authenticate(email: string, password: string): Observable<User> {
+    authenticate(email: string, password: string): Observable<any> {
         // Normally you would do an HTTP request to determine to
         // attempt authenticating the user using the supplied credentials.
 
@@ -46,14 +46,12 @@ export class UserService {
             return this.http
                 .post(`${this.config.apiEndpoint}/auth`, {email, password})
                 .pipe(
-                    map(data => {
-                        return MOCK_USER;
-                    })
+                    map(data => data['token'] )
                 );
         } else {
             if (email === MOCK_USER.email && password === MOCK_USER.password) {
                 this._authenticated = true;
-                return Observable.of(MOCK_USER);
+                return Observable.of('xyz');
             }
 
             return Observable.throw(new Error('Invalid email or password'));

@@ -85,7 +85,7 @@ export class AuthenticationErrorAction implements Action {
 export class AuthenticationSuccessAction implements Action {
     public type: string = ActionTypes.AUTHENTICATE_SUCCESS;
 
-    constructor(public payload: { user: User }) {}
+    constructor(public payload: { token: string, authenticated: boolean }) {}
 }
 
 /**

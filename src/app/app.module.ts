@@ -20,6 +20,15 @@ import { RouterModule } from '@angular/router';
 import { UsersModule } from './users/users.module';
 import { AppConfigModule } from './app-config.module';
 
+// log monitor
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
+
+export function instrumentOptions() {
+    return {
+        monitor: useLogMonitor({ visible: true, position: 'right' })
+    };
+}
 
 @NgModule({
   declarations: [
@@ -37,7 +46,9 @@ import { AppConfigModule } from './app-config.module';
       storeModule,
       effectsModule,
       RouterModule,
-      UsersModule
+      UsersModule,
+      StoreDevtoolsModule.instrument(instrumentOptions),
+      StoreLogMonitorModule,
   ],
   providers: [
       reducerProvider,

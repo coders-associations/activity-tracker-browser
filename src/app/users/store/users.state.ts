@@ -9,6 +9,7 @@ export interface State {
     error?: string;
     loaded: boolean;
     loading: boolean;
+    token: string;
     user?: User;
 }
 
@@ -18,5 +19,6 @@ export interface State {
 export const initialState: State = {
     authenticated: false,
     loaded: false,
-    loading: false
+    loading: false,
+    token: '',
 };
