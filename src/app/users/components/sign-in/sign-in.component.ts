@@ -95,7 +95,7 @@ export class SignInComponent implements OnDestroy, OnInit {
             )
             .subscribe(value => {
                 this.store.dispatch(new RouterActions.Go({
-                    path: ['/dashboard', {routeParam: 1}]
+                    path: ['/dashboard/activities']
                 }));
             });
     }
