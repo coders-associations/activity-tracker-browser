@@ -5,7 +5,7 @@ import { Action } from '@ngrx/store';
 import { type } from '../../core/util';
 
 // import models
-import { User } from '../../core/models/user';
+import { User } from '../models/user';
 
 export const ActionTypes = {
     AUTHENTICATE: type('[users] Authenticate'),
@@ -85,7 +85,7 @@ export class AuthenticationErrorAction implements Action {
 export class AuthenticationSuccessAction implements Action {
     public type: string = ActionTypes.AUTHENTICATE_SUCCESS;
 
-    constructor(public payload: { user: User }) {}
+    constructor(public payload: { token: string, authenticated: boolean }) {}
 }
 
 /**

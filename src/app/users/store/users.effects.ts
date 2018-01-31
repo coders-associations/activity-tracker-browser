@@ -6,10 +6,10 @@ import { Effect, Actions, toPayload } from '@ngrx/effects';
 
 // import rxjs
 import { Observable } from 'rxjs/Observable';
-import {catchError, debounceTime, map, switchMap} from 'rxjs/operators';
+import {catchError, debounceTime, map, switchMap, tap} from 'rxjs/operators';
 
 // import services
-import { UserService } from '../../core/services/user.service';
+import { UserService } from '../services/user.service';
 
 // import actions
 import {
@@ -51,12 +51,11 @@ export class UserEffects {
     public authenticate: Observable<Action> = this.actions
         .ofType(ActionTypes.AUTHENTICATE)
         .pipe(
-            debounceTime(500),
             map(toPayload),
             switchMap(payload =>
                 this.userService.authenticate(payload.email, payload.password)
                     .pipe(
-                        map(user => new AuthenticationSuccessAction({ user })),
+                        map(token => new AuthenticationSuccessAction({ token, authenticated: true })),
                         catchError(error => Observable.of(new AuthenticationErrorAction({ error })))
                     )
             )
@@ -86,7 +85,6 @@ export class UserEffects {
     public createUser: Observable<Action> = this.actions
         .ofType(ActionTypes.SIGN_UP)
         .pipe(
-            debounceTime(500),
             map(toPayload),
             switchMap(payload =>
                 this.userService.create(payload.user)

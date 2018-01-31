@@ -1,6 +1,8 @@
-<div>
-    <div *ngIf="error | async as errorMessage" class="error">{{ errorMessage }}</div>
-    <form *ngIf="!(loading | async)" (ngSubmit)="submit()" [formGroup]="form" novalidate>
+<div  fxFlex fxLayout="column" class="sign-in__form">
+<!--
+    <div fxFlex *ngIf="error | async as errorMessage" class="error">{{ errorMessage }}</div>
+-->
+    <form fxFlex fxLayout="column" *ngIf="!(loading | async)" (ngSubmit)="submit()" [formGroup]="form" novalidate>
         <mat-form-field>
             <input
                 matInput
@@ -28,7 +30,6 @@
             >
         </mat-form-field>
         <button mat-raised-button color="accent" [disabled]="form.invalid" type="submit">Sign In</button>
-        <a mat-button (click)="signUp()">Sign Up with Email</a>
     </form>
     <div>
         <mat-spinner *ngIf="loading | async"></mat-spinner>

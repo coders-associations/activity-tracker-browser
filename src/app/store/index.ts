@@ -3,6 +3,7 @@ import { ActionReducerMap, StoreModule } from '@ngrx/store';
 import { State } from './app.state';
 import { reducers } from './app.reducers';
 import { EffectsModule } from '@ngrx/effects';
+import { RouterEffects } from './router.effects';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<State>>('app.reducer');
 
@@ -22,5 +23,7 @@ export const storeModule = [
 ];
 
 export const effectsModule = [
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([
+        RouterEffects
+    ])
 ];

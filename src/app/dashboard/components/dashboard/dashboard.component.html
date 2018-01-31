@@ -1,0 +1,12 @@
+<div fxFlex fxLayout="column">
+  <app-menu [noAction]="true"></app-menu>
+  <mat-sidenav-container class="dashboard__container" fxFlex fxLayout="column">
+    <mat-sidenav mode="side" opened="true" fxFlex class="dashboard__container--nav">
+      <app-side-nav></app-side-nav>
+    </mat-sidenav>
+    <mat-sidenav-content  class="dashboard__container--content" fxFlex>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+

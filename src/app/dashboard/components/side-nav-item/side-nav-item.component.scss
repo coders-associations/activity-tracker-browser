@@ -1,0 +1,57 @@
+@import "../../../../assets/styles/vars";
+
+$item-size: 25px;
+
+.side-nav-item {
+    background: $bg-almost-blue-light;
+    width: 100%;
+    height: 30px;
+    display: block;
+    margin: 2px;
+    font-size: 1.3em;
+    color: white;
+    padding: 5px 30px;
+    cursor: pointer;
+    transition: background ease-in 0.2s;
+
+    &:hover {
+        background: $bg-light-blue;
+    }
+}
+
+.side-nav-item--icon{
+    height: $item-size;
+    width: $item-size;
+    margin: 0 auto;
+    display: inline-block;
+    background-size: $item-size;
+}
+
+.side-nav-item--title{
+    vertical-align: super;
+    padding-left: 10px;
+}
+
+.side-nav-item--icon-dashboard {
+    @extend .side-nav-item--icon;
+
+    background-image: url('../../../../assets/images/dashboard.svg');
+}
+
+.side-nav-item--icon-history {
+    @extend .side-nav-item--icon;
+
+    background-image: url('../../../../assets/images/list.svg');
+}
+
+.side-nav-item--icon-statistics {
+    @extend .side-nav-item--icon;
+
+    background-image: url('../../../../assets/images/bar-chart.svg');
+}
+
+.side-nav-item--icon-settings {
+    @extend .side-nav-item--icon;
+
+    background-image: url('../../../../assets/images/settings.svg');
+}

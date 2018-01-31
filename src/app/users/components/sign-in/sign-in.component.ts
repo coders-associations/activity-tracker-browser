@@ -6,11 +6,11 @@ import { Store } from '@ngrx/store';
 
 // rxjs
 import { Observable } from 'rxjs/Observable';
-import {filter, map, takeWhile} from 'rxjs/operators';
+import { filter, map, takeWhile } from 'rxjs/operators';
 
 // actions
 import { AuthenticateAction } from '../../store/users.actions';
-import * as RouterActions from '../../../core/router.actions';
+import * as RouterActions from '../../../store/router.actions';
 
 
 import { State } from '../../../store/app.state';
@@ -21,6 +21,7 @@ import { getUsersState } from '../../store/users.reducers';
  * @class SignInComponent
  */
 @Component({
+    selector: 'app-sign-in',
     templateUrl: './sign-in.component.html',
     styleUrls: ['./sign-in.component.scss']
 })
@@ -73,8 +74,8 @@ export class SignInComponent implements OnDestroy, OnInit {
     public ngOnInit() {
         // set formGroup
         this.form = this.formBuilder.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required]
+            email: ['', [Validators.required, Validators.pattern('[^ @]*@[^ @]*')]],
+            password: ['', [Validators.required, Validators.minLength(8)]]
         });
 
         // set error
@@ -94,7 +95,7 @@ export class SignInComponent implements OnDestroy, OnInit {
             )
             .subscribe(value => {
                 this.store.dispatch(new RouterActions.Go({
-                    path: ['/users/my-account', {routeParam: 1}]
+                    path: ['/dashboard/activities']
                 }));
             });
     }

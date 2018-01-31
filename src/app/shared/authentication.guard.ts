@@ -8,7 +8,7 @@ import 'rxjs/add/operator/take';
 // import @ngrx
 import { Store } from '@ngrx/store';
 
-import * as RouterActions from '../core/router.actions';
+import * as RouterActions from '../store/router.actions';
 import { State } from '../store/app.state';
 import { getUsersState } from '../users/store/users.reducers';
 import { map, tap, take, filter } from 'rxjs/operators';
@@ -34,15 +34,16 @@ export class AuthenticatedGuard implements CanActivate {
         const observable = this.store
             .select(getUsersState)
             .pipe(
-                map(state => state.authenticated),
-                filter(authenticated => authenticated === false),
-                tap(() =>
-                        this.store.dispatch(new RouterActions.Go({
-                            path: ['/users/sign-in', {routeParam: 1}]
-                        }))
-                ),
-                take(1)
+                map(appState => appState.authenticated)
             );
+
+        observable.subscribe(authenticated => {
+            if (!authenticated) {
+                this.store.dispatch(new RouterActions.Go({
+                    path: ['/users/sign-in', {routeParam: 1}]
+                }));
+            }
+        });
 
         return observable;
     }

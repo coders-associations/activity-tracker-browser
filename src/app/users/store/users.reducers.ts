@@ -2,7 +2,7 @@
 import { Actions, ActionTypes } from './users.actions';
 
 // import models
-import { User } from '../../core/models/user';
+import { User } from '../models/user';
 import { State } from './users.state';
 import { createFeatureSelector } from '@ngrx/store';
 
@@ -30,11 +30,12 @@ export function reducer(state: any, action: Actions): State {
             };
 
         case ActionTypes.AUTHENTICATED_SUCCESS:
+        case ActionTypes.AUTHENTICATE_SUCCESS:
             return {
                 ...state,
                 authenticated: action.payload.authenticated,
                 loaded: true,
-                user: action.payload.user
+                token: action.payload.token,
             };
 
         case ActionTypes.AUTHENTICATE_ERROR:
@@ -46,7 +47,6 @@ export function reducer(state: any, action: Actions): State {
                 loading: false
             };
 
-        case ActionTypes.AUTHENTICATE_SUCCESS:
         case ActionTypes.SIGN_UP_SUCCESS:
             const user: User = action.payload.user;
 
