@@ -1,7 +1,8 @@
 export interface Activity {
+    id?: string;
     name: string;
     type: string;
     color: string;
-    cols: number;
-    rows: number;
+    cols?: number;
+    rows?: number;
 }

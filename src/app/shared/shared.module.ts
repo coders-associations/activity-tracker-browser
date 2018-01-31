@@ -3,17 +3,21 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
-    MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
-    MatProgressSpinnerModule, MatSidenavModule, MatTableModule
+    MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule, MatSidenavModule, MatTableModule, MatSelectModule
 } from '@angular/material';
 import { MenuComponent } from './components/menu/menu.component';
 import { ActionButtonsComponent } from './components/action-buttons/action-buttons.component';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthHttpInterceptor} from "../app.interceptor";
 
 const sharedModules = [
     FlexLayoutModule,
     FormsModule,
+    MatDialogModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
@@ -25,7 +29,9 @@ const sharedModules = [
     ReactiveFormsModule,
     MatSidenavModule,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatSelectModule
 ];
 
 @NgModule({
@@ -41,6 +47,13 @@ const sharedModules = [
     exports: [
         ...sharedModules,
         MenuComponent
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthHttpInterceptor,
+            multi: true
+        }
     ]
 })
 

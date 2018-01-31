@@ -3,3 +3,12 @@
 gridster {
     background: $bg-light-grey;
 }
+
+gridster-item {
+    background: white;
+    padding-top: 20px;
+}
+
+.gridster-item__wrapper {
+    height: 100%;
+}

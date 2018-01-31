@@ -17,6 +17,7 @@ import { ItemNewComponent } from './components/activity-grid/item-new/item-new.c
 import { ItemSettingsComponent } from './components/activity-grid/item-settings/item-settings.component';
 import { initialStateProvider, modelEffectsModule, modelStoreModule, reducerProvider } from './store/index';
 import { ActivityService } from './services/activity-service';
+import { NewItemDialogComponent } from './components/activity-grid/new-item-dialog/new-item-dialog.component';
 
 @NgModule({
     imports: [
@@ -38,7 +39,11 @@ import { ActivityService } from './services/activity-service';
         ItemFreqComponent,
         ItemTimeComponent,
         ItemNewComponent,
-        ItemSettingsComponent
+        ItemSettingsComponent,
+        NewItemDialogComponent
+    ],
+    entryComponents: [
+        NewItemDialogComponent
     ],
     providers: [
         AuthenticatedGuard,

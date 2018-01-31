@@ -83,9 +83,6 @@ export class UserService {
      * @returns {User}
      */
     create(user: User): Observable<User> {
-        // Normally you would do an HTTP request to POST the user
-        // details and then return the new user object
-        // but, let's just return the new user for this example.
         const {email, password, firstName, lastName} = user;
 
         if (this.config.server_available) {

@@ -3,7 +3,8 @@ import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
 import {
-    ActionTypes, GetActivitiesErrorAction, GetActivitiesSuccessAction, GetActivityHistoryErrorAction,
+    ActionTypes, AddActivityErrorAction, AddActivitySuccessAction, GetActivitiesErrorAction, GetActivitiesSuccessAction,
+    GetActivityHistoryErrorAction,
     GetActivityHistorySuccessAction
 } from './dashboard.actions';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -36,6 +37,20 @@ export class ActivityEffects {
                     .pipe(
                         map(activities => new GetActivitiesSuccessAction({ activities })),
                         catchError(error => Observable.of(new GetActivitiesErrorAction({ error })))
+                    )
+            )
+        );
+
+    @Effect()
+    public addActivity: Observable<Action> = this.actions
+        .ofType(ActionTypes.ADD_ACTIVITY)
+        .pipe(
+            map(toPayload),
+            switchMap(payload =>
+                this.activityService.addActivity(payload.activity)
+                    .pipe(
+                        map(id => new AddActivitySuccessAction({ ...payload, id })),
+                        catchError(error => Observable.of(new AddActivityErrorAction({ error })))
                     )
             )
         );
