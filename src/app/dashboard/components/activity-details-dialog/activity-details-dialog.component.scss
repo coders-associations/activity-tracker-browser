@@ -1,0 +1,12 @@
+.activity-log__table {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.activity-log__actions {
+    flex-direction: row-reverse;
+}
+
+.activity-log__delete {
+    margin-right: 10px;
+}

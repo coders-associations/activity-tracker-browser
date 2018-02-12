@@ -1,0 +1,13 @@
+@import "styles/components/dashboard-item";
+
+.item-content__buttons {
+    display: flex;
+    padding-right: 10px;
+}
+
+.mat-raised-button {
+    flex: 1;
+    margin: 5px;
+    min-width: auto;
+    font-weight: 300;
+}

@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG, AppConfig } from '../../app-config.module';
 import {catchError, map, tap} from 'rxjs/operators';
+import {CookieService} from "ngx-cookie-service";
 
 export const MOCK_USER: User = {
    _id: '1',
@@ -27,7 +28,7 @@ export class UserService {
      */
     private _authenticated = false;
 
-    constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) {
+    constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig, private cookieService: CookieService) {
 
     }
 
@@ -62,9 +63,11 @@ export class UserService {
      * Determines if the user is authenticated
      * @returns {Observable<boolean>}
      */
-    authenticated(): Observable<boolean> {
+    authenticated(): Observable<string> {
+        const token = this.cookieService.get('x-activity-token');
+        console.log(token);
 
-        return Observable.of(this._authenticated);
+        return Observable.of(token);
     }
 
     /**

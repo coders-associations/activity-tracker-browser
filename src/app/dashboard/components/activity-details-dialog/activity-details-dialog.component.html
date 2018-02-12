@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Activity details</h2>
+<mat-dialog-content>
+  <p><span>Name:</span> {{ data.item.name }}</p>
+  <p><span>Type:</span> {{ data.item.type }}</p>
+  <p><span>Color:</span> {{ data.item.color }}</p>
+  <p><span>Last update:</span> {{ data.item.updated_at | date: 'short' }}</p>
+  <p><span>Created at:</span> {{ data.item.created_at | date: 'short' }}</p>
+  <mat-table class="activity-log__table" *ngIf="data.item.periods.length" [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{ i + 1 }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="start">
+      <mat-header-cell *matHeaderCellDef> Start Date </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{ item.start_date | date: 'short' }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="end">
+      <mat-header-cell *matHeaderCellDef> End Date </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{ item.end_date | date: 'short' }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="duration">
+      <mat-header-cell *matHeaderCellDef> Duration (hours:minutes:seconds)</mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{ item.duration | date: item.duration > 1000 * 60 * 60 ? 'hh:mm:ss' : '00:mm:ss'}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</mat-dialog-content>
+<mat-dialog-actions class="activity-log__actions">
+  <button mat-button [mat-dialog-close]="false">Close</button>
+  <button mat-raised-button color="accent" class="activity-log__delete" (click)="deleteItem()">Delete</button>
+</mat-dialog-actions>

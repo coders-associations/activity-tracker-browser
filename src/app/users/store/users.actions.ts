@@ -52,7 +52,7 @@ export class AuthenticatedAction implements Action {
 export class AuthenticatedSuccessAction implements Action {
     public type: string = ActionTypes.AUTHENTICATED_SUCCESS;
 
-    constructor(public payload: {authenticated: boolean, user: User}) {}
+    constructor(public payload: {authenticated: boolean, token: string}) {}
 }
 
 /**

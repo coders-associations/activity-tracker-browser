@@ -1,0 +1,9 @@
+@import "styles/components/dashboard-item";
+
+.item-new__wrapper {
+    background-color: #BDBDBD;
+
+    &:hover {
+        background-color: #9E9E9E
+    }
+}

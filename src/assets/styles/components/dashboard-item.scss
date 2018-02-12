@@ -1,0 +1,56 @@
+$item-size: 120px;
+
+.item-new__icon {
+    height: 120px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    font-size: 10em;
+    line-height: 1em;
+}
+
+.item-new__text {
+    text-align: center;
+    font-size: 2.2em;
+    font-weight: 300;
+}
+
+.item-new__wrapper {
+    height: 100%;
+    padding-top: 2em;
+    transition: background-color 0.4s ease-in;
+    cursor: pointer;
+}
+
+.item-wrapper {
+    display: flex;
+    height: 100%;
+}
+
+.item-icon__wrapper {
+    display: flex;
+    font-size: 5em;
+    color: white;
+    text-align: center;
+    flex: 2;
+    align-items: center;
+}
+
+.item-content {
+    flex: 4;
+}
+
+.item-text {
+    font-weight: 300;
+    color: white;
+    font-size: 1.5em;
+    margin: 20px 5px 5px;
+}
+
+.item-icon {
+    flex: 1;
+}
+
+.mat-raised-button {
+    line-height: 30px;
+}

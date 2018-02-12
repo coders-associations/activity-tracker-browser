@@ -1,0 +1,33 @@
+@import "styles/components/dashboard-item";
+
+.item-content__buttons {
+    display: flex;
+    padding-right: 10px;
+    flex-direction: column;
+    padding-top: 7px;
+}
+
+.mat-raised-button {
+    flex: 1;
+    margin: 3px;
+    min-width: auto;
+    font-weight: 300;
+}
+
+.item-actions {
+    flex: 2;
+}
+
+.item-type {
+    margin: 0 5px;
+    color: white;
+    font-weight: 100;
+}
+
+.item-date {
+    @extend .item-type;
+
+    padding-top: 0.2em;
+    font-size: 0.8em;
+    font-weight: 300;
+}

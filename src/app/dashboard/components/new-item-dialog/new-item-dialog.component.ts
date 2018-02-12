@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AddActivityAction } from '../../../store/dashboard.actions';
-import { State } from '../../../../store/app.state';
+import { AddActivityAction } from '../../store/dashboard.actions';
+import { State } from '../../../store/app.state';
 import { Store } from '@ngrx/store';
-import { ChooseEventColors } from '../../../enums/chooseEventColors';
+import { ChooseEventColors } from '../../enums/chooseEventColors';
 
 @Component({
   selector: 'app-new-item-dialog',
@@ -47,6 +47,8 @@ export class NewItemDialogComponent implements OnInit {
             name: this.form.get('name').value,
             type: this.form.get('type').value,
             color: this.form.get('color').value,
+            row: 1,
+            col: this.form.get('type').value === 'time' ? 2 : 1,
         };
 
         this.store.dispatch(new AddActivityAction({ activity }));

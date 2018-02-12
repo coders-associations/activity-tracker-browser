@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {NewItemDialogComponent} from "../new-item-dialog/new-item-dialog.component";
-import {MatDialog} from '@angular/material';
+import { NewItemDialogComponent } from '../new-item-dialog/new-item-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-item-new',
   templateUrl: './item-new.component.html',
   styleUrls: ['./item-new.component.scss']
 })
-export class ItemNewComponent implements OnInit {
+export class ItemNewComponent {
     name: string;
 
     constructor(public dialog: MatDialog) {
-    }
-
-    ngOnInit() {
     }
 
     openDialog(): void {
@@ -23,7 +20,6 @@ export class ItemNewComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
             this.name = result;
         });
     }
