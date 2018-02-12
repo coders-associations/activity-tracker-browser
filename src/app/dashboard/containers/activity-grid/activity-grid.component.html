@@ -1,0 +1,10 @@
+<gridster [options]="options">
+  <gridster-item [item]="item" *ngFor="let item of dashboard | async">
+    <div class="gridster-item__wrapper" [ngSwitch]="item.type" [ngStyle]="{'background-color': item.color}">
+      <app-item-freq *ngSwitchCase="'freq'" [item]="item" (start)="startItem($event)"></app-item-freq>
+      <app-item-new *ngSwitchCase="'new'"></app-item-new>
+      <app-item-time *ngSwitchCase="'time'" [item]="item" (start)="startItem($event)" (stop)="stopItem($event)"></app-item-time>
+      <app-item-settings *ngSwitchCase="'settings'" (goToSettings)="goToSettings()"></app-item-settings>
+    </div>
+  </gridster-item>
+</gridster>

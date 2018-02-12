@@ -1,8 +1,0 @@
-<gridster [options]="options">
-  <gridster-item [item]="item" *ngFor="let item of dashboard | async" [ngSwitch]="item.type" [ngStyle]="{'background-color': item.color}">
-    <app-item-freq *ngSwitchCase="'freq'"></app-item-freq>
-    <app-item-new *ngSwitchCase="'new'"></app-item-new>
-    <app-item-time *ngSwitchCase="'time'"></app-item-time>
-    <app-item-settings *ngSwitchCase="'settings'"></app-item-settings>
-  </gridster-item>
-</gridster>

@@ -6,7 +6,7 @@ import { Effect, Actions, toPayload } from '@ngrx/effects';
 
 // import rxjs
 import { Observable } from 'rxjs/Observable';
-import {catchError, debounceTime, map, switchMap, tap} from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 // import services
 import { UserService } from '../services/user.service';
@@ -23,6 +23,7 @@ import {
     SignUpErrorAction,
     SignUpSuccessAction
 } from './users.actions';
+import { CookieService } from 'ngx-cookie-service';
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your
@@ -55,7 +56,11 @@ export class UserEffects {
             switchMap(payload =>
                 this.userService.authenticate(payload.email, payload.password)
                     .pipe(
-                        map(token => new AuthenticationSuccessAction({ token, authenticated: true })),
+                        map(token => {
+                            this.cookieService.set( 'x-activity-token', token );
+
+                            return new AuthenticationSuccessAction({ token, authenticated: true });
+                        }),
                         catchError(error => Observable.of(new AuthenticationErrorAction({ error })))
                     )
             )
@@ -70,9 +75,9 @@ export class UserEffects {
         .pipe(
             map(toPayload),
             switchMap(payload =>
-                this.userService.authenticatedUser()
+                this.userService.authenticated()
                     .pipe(
-                        map(user => new AuthenticatedSuccessAction({ authenticated: (user !== null), user })),
+                        map(token => new AuthenticatedSuccessAction({ authenticated: (token !== ''), token })),
                         catchError(error => Observable.of(new AuthenticatedErrorAction({ error })))
                     )
             )
@@ -118,6 +123,7 @@ export class UserEffects {
      * @param {UserService} userService
      */
     constructor(private actions: Actions,
-                private userService: UserService) {
+                private userService: UserService,
+                private cookieService: CookieService) {
     }
 }

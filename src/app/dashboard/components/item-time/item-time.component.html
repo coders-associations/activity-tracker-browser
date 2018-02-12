@@ -1,0 +1,23 @@
+<div class="item-wrapper gridster-item-content">
+    <div class="item-icon__wrapper">
+        <i class="ion-ios-wineglass-outline item-icon"></i>
+    </div>
+    <div class="item-content">
+        <p class="item-text">{{item.name}}</p>
+        <p class="item-type"> Time dependent</p>
+        <p class="item-date" *ngIf="item.active_period && item.active_period.status === 'during'"> Started at: {{item.active_period.start_date | date:'short'}}</p>
+        <p class="item-date" *ngIf="item.active_period && item.active_period.status !== 'during'"> Ended at: {{item.active_period.end_date | date:'short'}}</p>
+    </div>
+    <div class="item-actions">
+        <div class="item-content__buttons">
+            <button disabled="{{ item.hasOwnProperty('active_period') && item.active_period.status === 'during' }}" mat-raised-button (click)="start.emit({ id: item.id })">Log beginning</button>
+            <button
+                mat-raised-button
+                (click)="stop.emit({ id: item.id })"
+                disabled="{{!item.hasOwnProperty('active_period') || item.hasOwnProperty('active_period') && item.active_period.status !== 'during'}}">
+                Log ending
+            </button>
+            <button mat-raised-button (click)="openDialog()">More</button>
+        </div>
+    </div>
+</div>

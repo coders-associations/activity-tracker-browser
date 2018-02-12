@@ -5,7 +5,8 @@ import 'rxjs/add/observable/of';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG, AppConfig } from '../../app-config.module';
-import {catchError, map, tap} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
 
 export const MOCK_USER: User = {
    _id: '1',
@@ -27,7 +28,7 @@ export class UserService {
      */
     private _authenticated = false;
 
-    constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) {
+    constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig, private cookieService: CookieService) {
 
     }
 
@@ -62,9 +63,11 @@ export class UserService {
      * Determines if the user is authenticated
      * @returns {Observable<boolean>}
      */
-    authenticated(): Observable<boolean> {
+    authenticated(): Observable<string> {
+        const token = this.cookieService.get('x-activity-token');
+        console.log(token);
 
-        return Observable.of(this._authenticated);
+        return Observable.of(token);
     }
 
     /**
@@ -83,9 +86,6 @@ export class UserService {
      * @returns {User}
      */
     create(user: User): Observable<User> {
-        // Normally you would do an HTTP request to POST the user
-        // details and then return the new user object
-        // but, let's just return the new user for this example.
         const {email, password, firstName, lastName} = user;
 
         if (this.config.server_available) {

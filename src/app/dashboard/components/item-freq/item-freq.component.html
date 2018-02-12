@@ -1,0 +1,12 @@
+<div class="item-wrapper gridster-item-content">
+    <div class="item-icon__wrapper">
+        <i class="ion-ios-wineglass-outline item-icon"></i>
+    </div>
+    <div class="item-content">
+        <p class="item-text">{{item.name}}</p>
+        <div class="item-content__buttons">
+            <button mat-raised-button (click)="start.emit({id: item.id})">Log</button>
+            <button mat-raised-button (click)="openDialog()">More</button>
+        </div>
+    </div>
+</div>
