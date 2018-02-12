@@ -6,7 +6,7 @@ import { Effect, Actions, toPayload } from '@ngrx/effects';
 
 // import rxjs
 import { Observable } from 'rxjs/Observable';
-import {catchError, debounceTime, map, switchMap, tap} from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 // import services
 import { UserService } from '../services/user.service';
@@ -23,7 +23,7 @@ import {
     SignUpErrorAction,
     SignUpSuccessAction
 } from './users.actions';
-import {CookieService} from "ngx-cookie-service";
+import { CookieService } from 'ngx-cookie-service';
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Activity } from '../../models/activity';
 import { ActivityDetailsDialogComponent } from '../activity-details-dialog/activity-details-dialog.component';
 import { MatDialog } from '@angular/material';
@@ -8,15 +8,12 @@ import { MatDialog } from '@angular/material';
   templateUrl: './item-freq.component.html',
   styleUrls: ['./item-freq.component.scss']
 })
-export class ItemFreqComponent implements OnInit {
+export class ItemFreqComponent {
 
     @Input() item: Activity;
     @Output() start = new EventEmitter<any>();
 
     constructor(public dialog: MatDialog) {
-    }
-
-    ngOnInit() {
     }
 
     openDialog(): void {

@@ -5,8 +5,8 @@ import 'rxjs/add/observable/of';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG, AppConfig } from '../../app-config.module';
-import {catchError, map, tap} from 'rxjs/operators';
-import {CookieService} from "ngx-cookie-service";
+import { map } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
 
 export const MOCK_USER: User = {
    _id: '1',

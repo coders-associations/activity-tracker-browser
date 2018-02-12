@@ -22,7 +22,7 @@ import { AppConfigModule } from './app-config.module';
 // log monitor
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
-import {SharedModule} from "./shared/shared.module";
+import { SharedModule } from './shared/shared.module';
 
 export function instrumentOptions() {
     return {

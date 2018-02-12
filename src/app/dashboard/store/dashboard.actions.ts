@@ -1,8 +1,8 @@
 import { type } from '../../core/util';
 import { Action } from '@ngrx/store';
 import { Activity } from '../models/activity';
-import {ActivityEvent} from '../models/activityEvent';
-import {ItemLog} from "../models/itemLog";
+import { ActivityEvent } from '../models/activityEvent';
+import { ItemLog } from '../models/itemLog';
 
 export const ActionTypes = {
     ACTIVITY_ERROR:  type('[dashboard] Activity error'),
