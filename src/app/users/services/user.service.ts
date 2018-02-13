@@ -65,7 +65,6 @@ export class UserService {
      */
     authenticated(): Observable<string> {
         const token = this.cookieService.get('x-activity-token');
-        console.log(token);
 
         return Observable.of(token);
     }
@@ -109,6 +108,7 @@ export class UserService {
     signout(): Observable<boolean> {
         // Normally you would do an HTTP request sign end the session
         // but, let's just return an observable of true.
+        this.cookieService.delete('x-activity-token');
         this._authenticated = false;
         return Observable.of(true);
     }
