@@ -6,6 +6,7 @@ import { ItemLog } from '../models/itemLog';
 
 export const ActionTypes = {
     ACTIVITY_ERROR:  type('[dashboard] Activity error'),
+    RESET_ACTIVITIES_STATE:  type('[dashboard] Reset activities state'),
     RESET_ACTIVITY_FLAG:  type('[dashboard] Reset activity flag'),
     ACTIVITY_SUCCESS:  type('[dashboard] Activity success'),
     ADD_ACTIVITY:  type('[dashboard] Add activity'),
@@ -134,6 +135,17 @@ export class ActivitySuccessAction implements Action {
 }
 
 /**
+ * ResetStateAction.
+ * @class ResetStateAction
+ * @implements {Action}
+ */
+export class ResetActivitiesStateAction implements Action {
+    public type: string = ActionTypes.RESET_ACTIVITIES_STATE;
+
+    constructor(public payload?: any) {}
+}
+
+/**
  * ActivityErrorAction.
  * @class ActivityErrorAction
  * @implements {Action}
@@ -199,4 +211,5 @@ export type Actions = AddActivityAction |
     GetActivityHistorySuccessAction |
     DeleteActivitySuccessAction |
     StopActivitySuccessAction |
+    ResetActivitiesStateAction |
     ResetActivityFlagAction;

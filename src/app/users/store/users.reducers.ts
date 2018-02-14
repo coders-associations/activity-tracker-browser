@@ -36,6 +36,7 @@ export function reducer(state: any, action: Actions): State {
                 authenticated: action.payload.authenticated,
                 loaded: true,
                 token: action.payload.token,
+                loading: false
             };
 
         case ActionTypes.AUTHENTICATE_ERROR:

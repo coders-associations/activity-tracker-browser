@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { State } from '../../../store/app.state';
 import { Store } from '@ngrx/store';
 import { SignOutAction } from '../../../users/store/users.actions';
-import * as RouterActions from '../../../store/router.actions';
+import { ResetActivitiesStateAction } from '../../../dashboard/store/dashboard.actions';
 
 
 @Component({
@@ -19,8 +19,6 @@ export class ActionButtonsComponent {
 
     logout() {
         this.store.dispatch(new SignOutAction());
-        this.store.dispatch(new RouterActions.Go({
-            path: ['/']
-        }));
+        this.store.dispatch(new ResetActivitiesStateAction());
     }
 }

@@ -29,6 +29,13 @@ export function reducer(state: any, action: Actions): State {
                 loading: true
             };
 
+        case ActionTypes.RESET_ACTIVITIES_STATE:
+            return {
+                ...state,
+                activities: [],
+                activityEvents: [],
+            };
+
         case ActionTypes.START_ACTIVITY_SUCCESS:
             const newActivities = state.activities.map(activity => {
                 if (activity.id === action.payload.activity.id) {
