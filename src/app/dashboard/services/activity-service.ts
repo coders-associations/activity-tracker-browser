@@ -103,8 +103,8 @@ export class ActivityService {
                 .get(`${this.config.apiEndpoint}/logs`)
                 .pipe(
                     map(data => {
-                        console.log(data);
-                        return MOCK_ACTIVITY_EVENTS;
+                        //console.log(data['logs'][0].activitiesLog);
+                        return data['logs'][0].activitiesLog;
                     })
                 );
         } else {
