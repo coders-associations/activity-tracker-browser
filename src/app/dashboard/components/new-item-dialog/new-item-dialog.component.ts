@@ -47,8 +47,8 @@ export class NewItemDialogComponent implements OnInit {
             name: this.form.get('name').value,
             type: this.form.get('type').value,
             color: this.form.get('color').value,
-            row: 1,
-            col: this.form.get('type').value === 'time' ? 2 : 1,
+            rows: 1,
+            cols: this.form.get('type').value === 'time' ? 2 : 1,
         };
 
         this.store.dispatch(new AddActivityAction({ activity }));
