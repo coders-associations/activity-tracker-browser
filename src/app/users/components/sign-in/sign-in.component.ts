@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 
 // rxjs
 import { Observable } from 'rxjs/Observable';
-import { filter, map, takeWhile } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 // actions
 import { AuthenticateAction } from '../../store/users.actions';
@@ -90,7 +90,6 @@ export class SignInComponent implements OnDestroy, OnInit {
         this.store.select(getUsersState)
             .pipe(
                 map(state => state.authenticated),
-                takeWhile(() => this.alive),
                 filter(authenticated => authenticated)
             )
             .subscribe(value => {

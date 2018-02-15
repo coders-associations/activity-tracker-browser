@@ -3,7 +3,7 @@
 
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      <mat-cell *matCellDef="let i = index"> {{ i + 1 }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
@@ -18,12 +18,12 @@
 
     <ng-container matColumnDef="eventType">
       <mat-header-cell *matHeaderCellDef> Event type </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.eventType}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.event}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="eventDate">
       <mat-header-cell *matHeaderCellDef> Date of action </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.eventDate}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.createdAt | date: 'short' }} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

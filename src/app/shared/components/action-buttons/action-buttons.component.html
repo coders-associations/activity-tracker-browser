@@ -1,4 +1,5 @@
 <div>
-  <button mat-raised-button routerLink="/users/login" color="accent">Login</button>
-  <button mat-raised-button routerLink="/users/login" color="primary">Register</button>
+  <button mat-raised-button *ngIf="!noAction" routerLink="/users/login" color="accent">Login</button>
+  <button mat-raised-button *ngIf="!noAction" routerLink="/users/login" color="primary">Register</button>
+  <button mat-raised-button *ngIf="noAction" (click)="logout()" color="accent">Logout</button>
 </div>

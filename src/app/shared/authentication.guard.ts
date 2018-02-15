@@ -40,7 +40,7 @@ export class AuthenticatedGuard implements CanActivate {
         observable.subscribe(authenticated => {
             if (!authenticated) {
                 this.store.dispatch(new RouterActions.Go({
-                    path: ['/users/sign-in', {routeParam: 1}]
+                    path: ['users/login']
                 }));
             }
         });

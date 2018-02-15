@@ -98,7 +98,18 @@ export class ActivityService {
 
 
     getActivitiesHistory(): Observable<Array<ActivityEvent>> {
-        return Observable.of(MOCK_ACTIVITY_EVENTS);
+        if (this.config.server_available) {
+            return this.http
+                .get(`${this.config.apiEndpoint}/logs`)
+                .pipe(
+                    map(data => {
+                        //console.log(data['logs'][0].activitiesLog);
+                        return data['logs'][0].activitiesLog;
+                    })
+                );
+        } else {
+            return Observable.of(MOCK_ACTIVITY_EVENTS);
+        }
     }
 
     determineSizes(itemList): Array<Activity> {
