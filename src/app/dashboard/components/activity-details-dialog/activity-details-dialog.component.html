@@ -5,7 +5,7 @@
   <p><span>Color:</span> {{ data.item.color }}</p>
   <p><span>Last update:</span> {{ data.item.updated_at | date: 'short' }}</p>
   <p><span>Created at:</span> {{ data.item.created_at | date: 'short' }}</p>
-  <mat-table class="activity-log__table" *ngIf="data.item.periods.length" [dataSource]="dataSource">
+  <mat-table class="activity-log__table" *ngIf="data.item.periods && data.item.periods.length" [dataSource]="dataSource">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
       <mat-cell *matCellDef="let i = index"> {{ i + 1 }} </mat-cell>
